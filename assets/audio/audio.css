@@ -1,0 +1,19 @@
+/* AUDIO */
+#pButton{
+	height: 16px;
+    width: 16px;
+    border: none;
+    background-size: 100% 90%;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+}
+
+.play{background: url("../../assets/audio/pause.png") ;}
+.pause{background: url("../../assets/audio/play.png") ;}
+
+#audioplayer{}
+#timeline{}
+#playhead{}
