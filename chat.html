@@ -24,14 +24,16 @@
 <div class="chat_window">
   <div class="top_menu">
     <div class="buttons">
-      <div class="button close"><span class="chat_close_icon"><i class="fa fa-times" aria-hidden="true"></i></span></div>
+      <div class="button close">
+        <span class="chat_close_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
+      </div>
     </div>
     <div class="title">Chat
     <div class="avatar">
         <div class="image-agent"></div>
         <div class="name-agent">
           <span>Agente</span>
-          Sandy
+          Sandy & Junior
         </div>
     </div>
     </div>
@@ -40,16 +42,19 @@
 <!-- FORMULÁRIO INICIAL DE IDENTIFICAÇÃO DO USUÁRIO -->  
 
   <form class="message_identify" id="message_identify">
-    <!-- <p>Olá! Seja Bem Vindo ao atendimento online da LH Tecnologia</p>
-    <p>Para um melhor atendimento gostariamos de saber quem é você</p> -->
-    <input type="text" placeholder="Nome/E-mail" id="txtUsername" name="txtUsername" value="ana"> 
+    <p>Olá! Seja Bem Vindo ao atendimento online da LH Tecnologia</p>
+    <p>Para um melhor atendimento gostariamos de saber quem é você</p>
+    <input type="text" placeholder="Nome/E-mail" id="txtUsername" name="txtUsername"> 
     <input type="text" placeholder="Telefone" id="txtTelefone" name="txtTelefone">
     <input type="hidden" id="txtPassword" name="txtPassword" value="ana903hr843">
     <input type="hidden" id="txtEmail" name="txtEmail" value="ana@lh.com.br">
     <input type="hidden" id="txtFila" name="txtFila" value="helpdesk">
     <input type="hidden" id="txtAuth" name="txtAuth" value="2hFbvXGelyrPIyNt">
-    <input type="text" id="txtDestino" name="txtDestino">
+    <input type="hidden" id="txtDestino" name="txtDestino">
     <input type="button" value="Iniciar" id="btnLogin">
+    <input type="button" value="RequestService" id="btnRequestService" hidden>
+    <!-- <input type="button" value="EnterChat" id="btnEnterChat">
+    <input type="button" id="btnCloseChat" name="btnCloseChat" value="Close" onclick="closechat()"> -->
   </form>
   
 
@@ -57,10 +62,14 @@
 
 
 <!-- ÁREA DE CONVERSA DO CHAT -->
-
-    <ul class="messages" id="messagesField" hidden> 
-      
-    </ul> 
+<ul class="messages" id="messagesField" hidden>
+  <!-- <li class="message left appeared">
+    <div class="text_wrapper">
+      <div class="text">Hello Philip! :)</div>
+    </div>
+    <time datetime="2009-11-13T20:00">Sandy • Yesterday 10:05:41</time>
+  </li> -->
+</ul>
 
 
 <!-- HISTÓRICO DA CONVERSA APÓS TEMPO SEM RESPOSTA -->
@@ -114,12 +123,6 @@
     </div>
   </li>
 </div>
-
-
-<input type="button" value="RequestService" id="btnRequestService">
-    <input type="button" value="EnterChat" id="btnEnterChat">
-    <input type="button" id="btnCloseChat" name="btnCloseChat" value="Close" onclick="closechat()">
-      
 <!--===============CHAT ON BUTTON STRART===============-->
     <div class="chat_on" id="chatIcon"> 
       <span class="chat_on_icon">

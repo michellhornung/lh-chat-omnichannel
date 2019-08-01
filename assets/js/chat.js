@@ -16,20 +16,23 @@ $(document).ready(function(){
     
 });
 
+//Button click handling 
 $("#btnLogin").click(function () {
     login();
     $("#message_identify").hide();
-     $("#messagesField").removeAttr('hidden');
-});
+     $(".messages").removeAttr('hidden');
+     $("#btnRequestService").click();
 
+     getAndSetValues();
+});
 $("#btnRequestService").click(function () {
-    alert("btnRequestService called.");
    reqserv();
 });
-
 $("#btnEnterChat").click(function () {
-    alert("btnEnterChat called.");
    enterchat();
+});
+$(".chat_close_icon").click(function () {
+    closechat();
 });
 
 function urlParam(name) {
@@ -40,10 +43,24 @@ function urlParam(name) {
     return unescape(results[1] || undefined);
 };
 
+function getAndSetValues() {
+    var username = $("#txtUsername").val();
+    var telefone = $("#txtTelefone").val();
+    // $("#txtUsername").val(username);
+    // $("#txtTelefone").val(telefone);
+    // $("#txtPassword").val("ana903hr843");
+    // $("#txtEmail").val("ana@lh.com.br");
+    // $("#txtFila").val("atendimento");
+    // $("#txtAuth").val("2hFbvXGelyrPIyNt");
+};
+
 txtUsername.value = urlParam("username");
 txtPassword.value = urlParam("password");
 txtEmail.value = urlParam("username") + '@lh.com.br'
 txtFila.value = urlParam("queue");
+
+
+
 
 
 
