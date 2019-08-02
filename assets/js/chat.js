@@ -2,6 +2,9 @@
  * Script for Agent page - Omnichannel LH
  */
 
+var messageRight = '';
+var username = '';
+
 $(document).ready(function(){
 	$(".chat_window").hide();
     $(".chat_on").click(function(){
@@ -44,7 +47,7 @@ function urlParam(name) {
 };
 
 function getAndSetValues() {
-    var username = $("#txtUsername").val();
+    username = $("#txtUsername").val();
     var telefone = $("#txtTelefone").val();
     // $("#txtUsername").val(username);
     // $("#txtTelefone").val(telefone);
@@ -58,85 +61,6 @@ txtUsername.value = urlParam("username");
 txtPassword.value = urlParam("password");
 txtEmail.value = urlParam("username") + '@lh.com.br'
 txtFila.value = urlParam("queue");
-
-
-
-
-
-
-
-//show messages into chat
-// (function () {
-//     var Message;
-//     Message = function (arg) {
-//         this.text = arg.text, this.message_side = arg.message_side;
-//         this.draw = function (_this) {
-//             return function () {
-//                 var $message;
-//                 $message = $($('.message_template').clone().html());
-//                 $message.addClass(_this.message_side).find('.text').html(_this.text);
-//                 $('.messages').append($message);
-//                 return setTimeout(function () {
-//                     return $message.addClass('appeared');
-//                 }, 0);
-//             };
-//         }(this);
-//         return this;
-//     };
-//     $(function () {
-//         var getMessageText, message_side, sendMessage;
-//         message_side = 'right';
-//         getMessageText = function () {
-//             var $message_input;
-//             $message_input = $('.message_input');
-//             return $message_input.val();
-//         };
-//         sendMessage = function (text) {
-//             var $messages, message;
-//             if (text.trim() === '') {
-//                 return;
-//             }
-//             $('.message_input').val('');
-//             $messages = $('.messages');
-//             message_side = message_side === 'left' ? 'right' : 'left';
-//             message = new Message({
-//                 text: text,
-//                 message_side: message_side
-//             });
-//             message.draw();
-//             return $messages.animate({ scrollTop: $messages.prop('scrollHeight') }, 340);
-//         };
-//         $('.send_message').click(function (e) {
-//             return sendMessage(getMessageText());
-//         });
-//         $('.message_input').keyup(function (e) {
-//             if (e.which === 13) {
-//                 return sendMessage(getMessageText());
-//             }
-//         });
-//         // sendMessage('Hello Philip! :)');
-//         // setTimeout(function () {
-//         //     return sendMessage('Hi Sandy! How are you?');
-//         // }, 1000);
-//         // return setTimeout(function () {
-//         //     return sendMessage('I\'m fine, thank you!');
-//         // }, 2000);
-//     });
-// }.call(this));
-
-
-
-
-
-// var doc = document.getElementById('SysFrame').contentWindow.document;
-// doc.open();
-// doc.write('<html><head><title></title></head><body><div id="content"></div></body></html>');
-// doc.close();
-
-// var doc = document.getElementById('MsgFrame').contentWindow.document;
-// doc.open();
-// doc.write('<html><head><title></title></head><body><div id="content"></div></body></html>');
-// doc.close();
 
 var ofchat = '';
 var room = '';
@@ -494,7 +418,16 @@ async function sendMsg(e) {
             $("#messagesField").append(error + '<br/>');
             $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
         });
-        $("#messagesField").append('Eu: ' + txtMsg.value + '<br/>');
+
+        messageRight = 
+        '<li class="message right appeared"> ' +
+         '   <div class="text_wrapper"> ' +
+          '  <div class="text">Eu: '  + txtMsg.value  + '</div> ' +
+           ' </div> ' +
+            '<time datetime="2009-11-13T20:00"> ' + username + ' • ' + getDateTime(); + ' </time> ' +
+        '</li> '
+        $("#messagesField").append(messageRight);
+
         $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
     } else if (pauseTimeout === null) {
     	sendTyping();
@@ -575,6 +508,16 @@ async function sendGone() {
     });
 }
 
+function getDateTime() {
+    var currentdate = new Date(Date.now());
+    var formatted = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+    return formatted;
+}
 
 
 
