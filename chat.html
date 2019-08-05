@@ -2,132 +2,112 @@
 <html lang="en">
 
 <head>
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-<link rel="icon" type="image/png" href="assets/img/favicon.ico">
-<title>Omnichannel LH - Chatbot</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+    name='viewport' />
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+  <title>Omnichannel LH - Chatbot</title>
 
-<!--     Fonts and icons     -->
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-<link href="assets/fontawesome/css/all.css" rel="stylesheet" />
-<!-- CSS Files -->
-<link href="assets/css/material-kit.css" rel="stylesheet" />
-<!-- Float Chat CSS -->
-<link href="assets/css/float-chat.css" rel="stylesheet">
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <link href="assets/fontawesome/css/all.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="assets/css/material-kit.css" rel="stylesheet" />
+  <!-- Float Chat CSS -->
+  <link href="assets/css/float-chat.css" rel="stylesheet">
 
 </head>
+
 <body>
 
-<div class="chat_window">
-  <div class="top_menu">
-    <div class="buttons">
-      <div class="button close">
-        <span class="chat_close_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
-      </div>
-    </div>
-    <div class="title">Chat
-    <div class="avatar">
-        <div class="image-agent"></div>
-        <div class="name-agent">
-          <span>Agente</span>
-          Sandy <span id="status-agent"></span>
+  <div class="chat_window">
+    <div class="top_menu">
+      <div class="buttons">
+        <div class="button close">
+          <span class="chat_close_icon"><i class="fa fa-times" aria-hidden="true"></i></span>
         </div>
-    </div>
-    </div>
-  </div>
-
-<!-- FORMULÁRIO INICIAL DE IDENTIFICAÇÃO DO USUÁRIO -->  
-
-  <form class="message_identify" id="message_identify">
-    <p>Olá! Seja Bem Vindo ao atendimento online da LH Tecnologia</p>
-    <p>Para um melhor atendimento gostariamos de saber quem é você</p>
-    <input type="text" placeholder="Nome/E-mail" id="txtUsername" name="txtUsername"> 
-    <input type="text" placeholder="Telefone" id="txtTelefone" name="txtTelefone">
-    <input type="hidden" id="txtPassword" name="txtPassword" value="ana903hr843">
-    <input type="hidden" id="txtEmail" name="txtEmail" value="ana@lh.com.br">
-    <input type="hidden" id="txtFila" name="txtFila" value="helpdesk">
-    <input type="hidden" id="txtAuth" name="txtAuth" value="2hFbvXGelyrPIyNt">
-    <input type="hidden" id="txtDestino" name="txtDestino">
-    <input type="button" value="Iniciar" id="btnLogin">
-    <input type="button" value="RequestService" id="btnRequestService" hidden>
-  </form>
-  
-<!-- ÁREA DE CONVERSA DO CHAT -->
-<ul class="messages" id="messagesField" hidden>
-
-</ul>
-
-
-<!-- HISTÓRICO DA CONVERSA APÓS TEMPO SEM RESPOSTA -->
-
-  <!-- <ul class="messages"> 
-  <li class="message left appeared">
-    <div class="text_wrapper">
-      <div class="text">Hello Philip! :)</div>
-    </div>
-    <time datetime="2009-11-13T20:00">Sandy • Yesterday 10:05:41</time>
-  </li>
-  <li class="message right appeared">
-    <div class="text_wrapper">
-      <div class="text">Hi Sandy! How are you?</div>
-    </div>
-    <time datetime="2009-11-13T20:00">Philip • Yesterday 10:05:48</time>
-  </li>
-  <li class="message left appeared">
-    <div class="text_wrapper">
-      <div class="text">I'm fine, thank you!</div>
-    </div>
-    <time datetime="2009-11-13T20:00">Sandy • Yesterday 10:06:02</time>
-  </li>
-   <form class="message_identify-continus">
-      <p>Continue o atendimento</p>      
-      <input type="button" value="Continuar">
-    </form>
-    </ul> -->
-
-
-  <div class="bottom_wrapper clearfix">
-    <div class="message_input_wrapper">
-      <input class="message_input" placeholder="Envie sua mensagem..." name="txtMsg" id="txtMsg" onkeyup="sendMsgClear(event)" onkeypress="sendMsg(event)"/>
-    </div>
-    <div class="send_message">
-      <div class="icon">
-        <svg width="57px" height="54px" viewBox="1496 193 57 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 25px; height: 25px;">
-          <g id="Group-9-Copy-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(1523.000000, 220.000000) rotate(-270.000000) translate(-1523.000000, -220.000000) translate(1499.000000, 193.000000)">
-            <path d="M5.42994667,44.5306122 L16.5955554,44.5306122 L21.049938,20.423658 C21.6518463,17.1661523 26.3121212,17.1441362 26.9447801,20.3958097 L31.6405465,44.5306122 L42.5313185,44.5306122 L23.9806326,7.0871633 L5.42994667,44.5306122 Z M22.0420732,48.0757124 C21.779222,49.4982538 20.5386331,50.5306122 19.0920112,50.5306122 L1.59009899,50.5306122 C-1.20169244,50.5306122 -2.87079654,47.7697069 -1.64625638,45.2980459 L20.8461928,-0.101616237 C22.1967178,-2.8275701 25.7710778,-2.81438868 27.1150723,-0.101616237 L49.6075215,45.2980459 C50.8414042,47.7885641 49.1422456,50.5306122 46.3613062,50.5306122 L29.1679835,50.5306122 C27.7320366,50.5306122 26.4974445,49.5130766 26.2232033,48.1035608 L24.0760553,37.0678766 L22.0420732,48.0757124 Z" id="sendicon" fill="#96AAB4" fill-rule="nonzero"></path>
-          </g>
-        </svg>
       </div>
-     
+      <div class="title">Chat
+        <div class="avatar">
+          <div class="image-agent"></div>
+          <div class="name-agent">
+            <span>Agente</span>
+            Sandy <span id="status-agent"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMULÁRIO INICIAL DE IDENTIFICAÇÃO DO USUÁRIO -->
+
+    <form class="message_identify" id="message_identify">
+      <p>Olá! Seja Bem Vindo ao atendimento online da LH Tecnologia</p>
+      <p>Para um melhor atendimento gostariamos de saber quem é você</p>
+      <input type="text" placeholder="Nome/E-mail" id="txtUsername" name="txtUsername">
+      <input type="text" placeholder="Telefone" id="txtTelefone" name="txtTelefone">
+      <input type="hidden" id="txtPassword" name="txtPassword" value="ana903hr843">
+      <input type="hidden" id="txtEmail" name="txtEmail" value="ana@lh.com.br">
+      <input type="hidden" id="txtFila" name="txtFila" value="helpdesk">
+      <input type="hidden" id="txtAuth" name="txtAuth" value="2hFbvXGelyrPIyNt">
+      <input type="hidden" id="txtDestino" name="txtDestino">
+      <input type="button" value="Iniciar" id="btnLogin">
+      <input type="button" value="RequestService" id="btnRequestService" hidden>
+    </form>
+
+    <!-- ÁREA DE CONVERSA DO CHAT -->
+    <ul class="messages" id="messagesField" hidden>
+
+    </ul>
+
+    <div class="bottom_wrapper clearfix">
+      <div class="message_input_wrapper">
+        <input class="message_input" placeholder="Envie sua mensagem..." name="txtMsg" id="txtMsg"
+          onkeyup="sendMsgClear(event)" onkeypress="sendMsg(event)" />
+      </div>
+      <div class="send_message">
+        <div class="icon">
+          <svg width="57px" height="54px" viewBox="1496 193 57 54" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 25px; height: 25px;">
+            <g id="Group-9-Copy-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
+              transform="translate(1523.000000, 220.000000) rotate(-270.000000) translate(-1523.000000, -220.000000) translate(1499.000000, 193.000000)">
+              <path
+                d="M5.42994667,44.5306122 L16.5955554,44.5306122 L21.049938,20.423658 C21.6518463,17.1661523 26.3121212,17.1441362 26.9447801,20.3958097 L31.6405465,44.5306122 L42.5313185,44.5306122 L23.9806326,7.0871633 L5.42994667,44.5306122 Z M22.0420732,48.0757124 C21.779222,49.4982538 20.5386331,50.5306122 19.0920112,50.5306122 L1.59009899,50.5306122 C-1.20169244,50.5306122 -2.87079654,47.7697069 -1.64625638,45.2980459 L20.8461928,-0.101616237 C22.1967178,-2.8275701 25.7710778,-2.81438868 27.1150723,-0.101616237 L49.6075215,45.2980459 C50.8414042,47.7885641 49.1422456,50.5306122 46.3613062,50.5306122 L29.1679835,50.5306122 C27.7320366,50.5306122 26.4974445,49.5130766 26.2232033,48.1035608 L24.0760553,37.0678766 L22.0420732,48.0757124 Z"
+                id="sendicon" fill="#96AAB4" fill-rule="nonzero"></path>
+            </g>
+          </svg>
+        </div>
+
+      </div>
     </div>
   </div>
-</div>
-<div class="message_template">
-  <li class="message">
-    <div class="text_wrapper">
-      <div class="text"></div>
-    </div>
-  </li>
-</div>
-<!--===============CHAT ON BUTTON STRART===============-->
-    <div class="chat_on" id="chatIcon"> 
-      <span class="chat_on_icon">
-        <i class="fa fa-comments" aria-hidden="true"></i>
-      </span> 
-    </div>
-<!--===============CHAT ON BUTTON END===============-->
-  
+  <div class="message_template">
+    <li class="message">
+      <div class="text_wrapper">
+        <div class="text"></div>
+      </div>
+    </li>
+  </div>
+  <!--===============CHAT ON BUTTON STRART===============-->
+  <div class="chat_on" id="chatIcon">
+    <span class="chat_on_icon">
+      <i class="fa fa-comments" aria-hidden="true"></i>
+    </span>
+  </div>
+  <!--===============CHAT ON BUTTON END===============-->
 
-<!--   Core JS Files   -->
-<script src="assets/fontawesome/js/all.js" type="text/javascript"></script>
-<script src="assets/js/core/jquery.min.js" type="text/javascript"></script>
-<script src="assets/js/core/eventsource.js" type="text/javascript"></script>
 
-<!-- Chat -->
-<script src="assets/js/chat.js" type="text/javascript"></script>
+  <!--   Core JS Files   -->
+  <script src="assets/fontawesome/js/all.js" type="text/javascript"></script>
+  <script src="assets/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="assets/js/core/eventsource.js" type="text/javascript"></script>
+
+  <!-- Chat -->
+  <script src="assets/js/chat.js" type="text/javascript"></script>
 
 </body>
+
 </html>
