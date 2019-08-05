@@ -6,6 +6,7 @@ var messageRight = '';
 var messageLeft = '';
 var btnCustom = '';
 var username = '';
+var agentName = '';
 
 $(document).ready(function(){
 	$(".chat_window").hide();
@@ -87,14 +88,14 @@ async function login() {
     ).then(
         data => {
             ofchat = data;
-            $("#messagesField").append('Login: ' + data + '<br/>');
-            $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
+            // $("#messagesField").append(setAgentMessage('Login: '+ data));
+            // $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
             loginSSE();
         }
     ).catch(function(error) {
         console.log(error);
-        $("#messagesField").append(error + '<br/>');
-        $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
+        //$("#messagesField").append(error + '<br/>');
+        //$("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
         return;
     });
 
@@ -110,19 +111,19 @@ async function loginSSE() {
     });
 
     source.addEventListener('open', function(e) {
-        $("#messagesField").append('Connections to the server established..<br/>');
-        $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
+        // $("#messagesField").append('Connections to the server established..<br/>');
+        // $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
     });
 
     source.onmessage = function(e) {
         console.log("event", JSON.parse(e.data));
-        $("#messagesField").append(e.data + '<br/>');
-        $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
+        //$("#messagesField").append(e.data + '<br/>');
+        // $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
     };
 
     source.onerror = function(e) {
         console.error(e);
-        $("#messagesField").append(e + '<br/>');
+        //$("#messagesField").append(e + '<br/>');
         $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
     };
     
@@ -134,17 +135,13 @@ async function loginSSE() {
         console.log("chatapi.chat", JSON.parse(e.data));
         var jmsg = JSON.parse(e.data);
         if (jmsg.state == 'composing') {
-            $("#status-agent").html(jmsg.from.split("@")[0] + ' está digitand...');
-            //document.getElementById('state').innerHTML = jmsg.from.split("@")[0] + ' is typing...';
+            $("#status-agent").html(jmsg.from.split("@")[0] + ' está digitando...');
         } else if (jmsg.state == 'paused') {
             $("#status-agent").html(jmsg.from.split("@")[0] + ' está pronto...');
-            //document.getElementById('state').innerHTML = jmsg.from.split("@")[0] + ' is paused...';
         } else if (jmsg.state == 'active') {
             $("#status-agent").html(jmsg.from.split("@")[0] + ' está online...');
-            //document.getElementById('state').innerHTML = jmsg.from.split("@")[0] + ' is online...';
         } else if (jmsg.state == 'gone') {
             $("#status-agent").html(jmsg.from.split("@")[0] + ' está offline...');
-            //document.getElementById('state').innerHTML = jmsg.from.split("@")[0] + ' is offline...';
         }
     });
 
@@ -153,35 +150,28 @@ async function loginSSE() {
         var jmsg = JSON.parse(e.data);
         if (jmsg.type == 'groupchat' && jmsg.from.split("/")[1] != txtUsername.value) {
             //txtDestino.value = jmsg.from.split("/")[1] + '@172.20.250.149';			
-            $("#messagesField").append(jmsg.from.split("/")[1] + '@172.20.250.149');
+            //$("#messagesField").append(jmsg.from.split("/")[1] + '@172.20.250.149');
+            // $("#messagesField").append(setAgentMessage(jmsg.from.split("/")[1] + '@172.20.250.149'));
 			var jmsgdata = JSON.parse(decodeURIComponent(jmsg.body));			
 			if (jmsgdata.type == 'Text') {	
-                $("#messagesField").append(jmsg.from.split("/")[1] + ': ' + jmsgdata.data + '<br/>');
-				//document.getElementById('MsgFrame').contentWindow.document.getElementById('content').innerHTML += jmsg.from.split("/")[1] + ': ' + jmsgdata.data + '<br/>';
+                // $("#messagesField").append(jmsg.from.split("/")[1] + ': ' + jmsgdata.data + '<br/>');
+				$("#messagesField").append(setAgentMessage(jmsg.from.split("/")[1] + ': ' + jmsgdata.data + '<br/>'));
 			} else if (jmsgdata.type == 'Option') {
-				for (var opt in jmsgdata.options) {			
-                    
-                    // btnCustom = 
-                    // '<div class="ml-auto"> ' +
-                    //  '   <input type="button" value="' + jmsgdata.options[opt] + ' " ' +
-                    //  ' class="btn btn-sm btn-warning btn-round" onclick="sendMsgBtn()"> ' +
-                    // ' </div> '
-
+				for (var opt in jmsgdata.options) {			    
                     var btn = document.createElement("input");
                     btn.setAttribute('type','button');		
                     btn.setAttribute('class', 'btn btn-sm btn-warning btn-round')			
 					btn.setAttribute('value',jmsgdata.options[opt]);
                     btn.onclick = sendMsgBtn;
                     $("#messagesField").append(btn);
-					//document.getElementById('MsgFrame').contentWindow.document.getElementById('content').appendChild(btn);
 				}
 			} else if (jmsgdata.type == 'Audio') {
 				var sound      = document.createElement('audio');
 				sound.controls = 'controls';
 				sound.src      = jmsgdata.data;
                 sound.type     = 'audio/mpeg';
-                $("#messagesField").html(sound);
-				//document.getElementById('MsgFrame').contentWindow.document.getElementById('content').appendChild(sound);
+                // $("#messagesField").html(sound);
+                $("#messagesField").html(setAgentMessage(sound));
 				sound.play();
 			} else if (jmsgdata.type == 'Transfer') {
 				txtFila.value = jmsgdata.data;
@@ -201,10 +191,6 @@ async function loginSSE() {
         console.log("chatapi.assist", JSON.parse(e.data));
     });
 
-    //source.addEventListener('chatapi.xmpp', function(e) {
-    //    console.debug("chatapi.xmpp", JSON.parse(e.data));
-    //});
-
     source.addEventListener('chatapi.notify', function(e) {
         console.log("chatapi.notify", JSON.parse(e.data));
     });
@@ -213,9 +199,8 @@ async function loginSSE() {
 
 async function logoff() {
 	sendGone();
-
-    $("#messagesField").append('Listening to server events stopped..<br/>');
-    $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
+    // $("#messagesField").append('Listening to server events stopped..<br/>');
+    // $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
     source.close();
 
     const URL = 'http://172.20.250.149:7070/rest/api/restapi/v1/chat/' + ofchat + '/logoff';
@@ -233,12 +218,13 @@ async function logoff() {
         }
     ).then(
         data => {
-            $("#messagesField").append('Logoff..<br/>');
+            // $("#messagesField").append('Logoff..<br/>');
+            $("#messagesField").append(setAgentMessage('Logoff...'));
             $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
         }
     ).catch(function(error) {
         console.log(error);
-        $("#messagesField").append(error + '<br/>');
+        // $("#messagesField").append(error + '<br/>');
         $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
     });
 }
@@ -262,7 +248,8 @@ async function reqserv() {
             return response.text();
         }
     ).then(data => {
-            $("#messagesField").append('Eu: ' + question + '<br/>');
+            // $("#messagesField").append('Eu: ' + question + '<br/>');
+            $("#messagesField").append(setUserMessage('Eu: ' + question));
 			$("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
             console.log("reqserv", JSON.parse(data));
             var jmsg = JSON.parse(data);
@@ -271,17 +258,15 @@ async function reqserv() {
             }            
             room = jmsg.sender.split("@")[0];
 
-            
-
-            $("#messagesField").append('Accepted...' + '<br/>');
-            $("#messagesField").append(getMessageFromAgent('right'));
+            //$("#messagesField").append('Accepted...' + '<br/>');
+            //$("#messagesField").append(getMessageFromAgent('right'));
             
 			$("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
 			enterchat();
         }
     ).catch(function(error) {
         console.log(error);
-        $("#messagesField").append(error + '<br/>');
+        //$("#messagesField").append(error + '<br/>');
         $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
     });
 }
@@ -302,7 +287,7 @@ async function cancelserv() {
         }
     ).catch(function(error) {
         console.log(error);
-        $("#messagesField").append(error + '<br/>');
+        //$("#messagesField").append(error + '<br/>');
         $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
     });
 }
@@ -319,14 +304,15 @@ async function enterchat() {
             if (!response.ok) {
                 throw Error(response.statusText);
             }
-            $("#messagesField").append('Enter room: ' + room + '...<br/>');
-            $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
+            //$("#messagesField").append('Enter room: ' + room + '...<br/>');
+            //$("#messagesField").append(setAgentMessage('Entrando na sala: ' + room + '...'));
+            // $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
 			setTimeout(getagent, 2000);
         }
     ).catch(function(error) {
         console.log(error);
-        $("#messagesField").append(error + '<br/>');
-        $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
+        //$("#messagesField").append(error + '<br/>');
+        // $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
     });
 }
 
@@ -342,13 +328,14 @@ async function closechat() {
             if (!response.ok) {
                 throw Error(response.statusText);
             }
-            $("#messagesField").append('Exit room: ' + room + '...<br/>');
+            // $("#messagesField").append('Exit room: ' + room + '...<br/>');
+            $("#messagesField").append(setAgentMessage('Saindo da sala: ' + room + '...'));
             $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
         }
     ).catch(function(error) {
         console.log(error);
-        $("#messagesField").append(error + '<br/>');
-        $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
+        //$("#messagesField").append(error + '<br/>');
+        // $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
     });
 }
 
@@ -372,15 +359,17 @@ async function getagent() {
 			for (var dest in jmsg.participant) {
 				if (jmsg.participant[dest].jid.split("/")[1] != txtUsername.value) {
                     //txtDestino.value = jmsg.participant[dest].jid.split("/")[1] + '@172.20.250.149';
-                    $("#messagesField").append(jmsg.participant[dest].jid.split("/")[1] + '@172.20.250.149');
+                    // $("#messagesField").append(jmsg.participant[dest].jid.split("/")[1] + '@172.20.250.149');
+                    // $("#messagesField").append(setAgentMessage(jmsg.participant[dest].jid.split("/")[1] + '@172.20.250.149'));
+                    agentName = jmsg.participant[dest].jid.split("/")[1] + '@172.20.250.149';
 					break;
 				}
 			}
         }    
     ).catch(function(error) {
         console.log(error);
-        $("#messagesField").append(error + '<br/>');
-        $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
+        //$("#messagesField").append(error + '<br/>');
+        // $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
     });
 }
 
@@ -397,15 +386,17 @@ function sendMsgBtn() {
 		response => response.text()
 	).then(
 		data => {
-            $("#messagesField").append('Sent..' + data + '<br/>');
+            // $("#messagesField").append('Sent..' + data + '<br/>');
+            $("#messagesField").append(setUserMessage('Enviado... ' + data));
 			$("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
 		}
 	).catch(function(error) {
         console.log(error);
-        $("#messagesField").append(error + '<br/>');
-		$("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
+        // $("#messagesField").append(error + '<br/>');
+		// $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
     });
-    $("#messagesField").append('<br/>Eu: ' + this.value + '<br/>');
+    // $("#messagesField").append('<br/>Eu: ' + this.value + '<br/>');
+    $("#messagesField").append(setUserMessage('Eu: ' + this.value));
 	$("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
 }
 
@@ -425,25 +416,19 @@ async function sendMsg(e) {
             response => response.text()
         ).then(
             data => {
-                $("#messagesField").append('Sent..' + data + '<br/>');
+                // $("#messagesField").append('Sent..' + data + '<br/>');
+                $("#messagesField").append(setUserMessage('Enviado... ' + data));
                 $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
             }
         ).catch(function(error) {
             console.log(error);
-            $("#messagesField").append(error + '<br/>');
-            $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
+            // $("#messagesField").append(error + '<br/>');
+            // $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
         });
 
-        messageRight = 
-        '<li class="message right appeared"> ' +
-         '   <div class="text_wrapper"> ' +
-          '  <div class="text">Eu: '  + txtMsg.value  + '</div> ' +
-           ' </div> ' +
-            '<time datetime="2009-11-13T20:00"> ' + username + ' • ' + getDateTime(); + ' </time> ' +
-        '</li> '
-        $("#messagesField").append(messageRight);
-
+        $("#messagesField").append('Eu: ' + setUserMessage(txtMsg.value));
         $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
+
     } else if (pauseTimeout === null) {
     	sendTyping();
 	}
@@ -474,8 +459,8 @@ async function sendTyping() {
         body: txtMsg.value
     }).catch(function(error) {
         console.log(error);
-        $("#messagesField").append(error + '<br/>');
-        $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
+        // $("#messagesField").append(error + '<br/>');
+        // $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
     });
 }
 var pauseTimeout = null;
@@ -490,8 +475,8 @@ async function sendPaused() {
         body: txtMsg.value
     }).catch(function(error) {
         console.log(error);
-        $("#messagesField").append(error + '<br/>');
-        $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
+        // $("#messagesField").append(error + '<br/>');
+        // $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
     });
 }
 async function sendActive() {
@@ -504,8 +489,8 @@ async function sendActive() {
         body: txtMsg.value
     }).catch(function(error) {
         console.log(error);
-        $("#messagesField").append(error + '<br/>');
-        $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
+        // $("#messagesField").append(error + '<br/>');
+        // $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
     });
 }
 async function sendGone() {
@@ -518,8 +503,8 @@ async function sendGone() {
         body: txtMsg.value
     }).catch(function(error) {
         console.log(error);
-        $("#messagesField").append(error + '<br/>');
-        $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
+        // $("#messagesField").append(error + '<br/>');
+        // $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
     });
 }
 
@@ -534,20 +519,43 @@ function getDateTime() {
     return formatted;
 }
 
-function getMessageFromAgent(messageSide) {
-    message = 
-        '<li class="message '+ messageSide + ' appeared"> ' +
+//SET MESSAGES OVER THE CHAT
+
+// function getMessageFromAgent(messageSide) {
+//     message = 
+//         '<li class="message '+ messageSide + ' appeared"> ' +
+//          '   <div class="text_wrapper"> ' +
+//           '  <div class="text">Eu: '  + txtMsg.value  + '</div> ' +
+//            ' </div> ' +
+//             '<time datetime="2009-11-13T20:00"> ' + username + ' • ' + getDateTime(); + ' </time> ' +
+//         '</li> '
+//         //$("#messagesField").append(messageRight);
+//     return message;
+// }
+
+function setAgentMessage(data) {
+    messageLeft = 
+            '<li class="message left appeared"> ' +
+             '   <div class="text_wrapper"> ' +
+              '  <div class="text">'  + data  + '</div> ' +
+               ' </div> ' +
+                '<time datetime="2009-11-13T20:00"> ' + agentName + ' • ' + getDateTime(); + ' </time> ' +
+            '</li> '
+
+    return messageLeft;
+}
+
+function setUserMessage(data) {
+    messageRight = 
+        '<li class="message right appeared"> ' +
          '   <div class="text_wrapper"> ' +
-          '  <div class="text">Eu: '  + txtMsg.value  + '</div> ' +
+          '  <div class="text">'  + data  + '</div> ' +
            ' </div> ' +
             '<time datetime="2009-11-13T20:00"> ' + username + ' • ' + getDateTime(); + ' </time> ' +
         '</li> '
-        //$("#messagesField").append(messageRight);
-    return message;
+
+    return messageRight;
 }
-
-
-
 
 
 
