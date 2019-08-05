@@ -30,7 +30,6 @@ right: 28px;
   margin-right: 10px;
   margin-top: 5px;
   position: relative;
-  color:;
 }
 /*.top_menu .buttons .button.close {
   background-color: #f5886e;
@@ -65,6 +64,8 @@ right: 28px;
   transition: all 0.5s linear;
   opacity: 0;
 }
+
+/*MESSAGE AGENT*/
 .messages .message.left .avatar {
   background-color: #f5886e;
   float: left;
@@ -80,6 +81,15 @@ right: 28px;
 .messages .message.left .text {
   color: #c48843;
 }
+.message.left time {
+    color: #c0c0c0;
+    font-size: 0.7em;
+    width: 100%;
+    display: grid;
+    padding-left: 25px;
+    text-align: left;
+}
+/*MESSAGE USER*/
 .messages .message.right .avatar {
   background-color: #fdbf68;
   float: right;
@@ -96,6 +106,19 @@ right: 28px;
 .messages .message.right .text {
   color: #45829b;
 }
+.message.right time {
+    color: #c0c0c0;
+    font-size: 0.7em;
+    width: 100%;
+    display: grid;
+    padding-right: 25px;
+    text-align: right;
+}
+
+span#status-agent {
+    display: contents;
+}
+
 .messages .message.appeared {
   opacity: 1;
 }
@@ -330,22 +353,6 @@ padding: 10px;
 
 }
 
-.message.left time {
-    color: #c0c0c0;
-    font-size: 0.7em;
-    width: 100%;
-    display: grid;
-    padding-left: 25px;
-    text-align: left;
-}
-.message.right time {
-    color: #c0c0c0;
-    font-size: 0.7em;
-    width: 100%;
-    display: grid;
-    padding-right: 25px;
-    text-align: right;
-}
 
 .btn.btn-chcustom {
   color: #fff;

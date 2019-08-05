@@ -155,7 +155,7 @@ async function loginSSE() {
 			var jmsgdata = JSON.parse(decodeURIComponent(jmsg.body));			
 			if (jmsgdata.type == 'Text') {	
                 // $("#messagesField").append(jmsg.from.split("/")[1] + ': ' + jmsgdata.data + '<br/>');
-				$("#messagesField").append(setAgentMessage(jmsg.from.split("/")[1] + ': ' + jmsgdata.data + '<br/>'));
+				$("#messagesField").append(setAgentMessage(jmsgdata.data));
 			} else if (jmsgdata.type == 'Option') {
 				for (var opt in jmsgdata.options) {			    
                     var btn = document.createElement("input");
@@ -249,7 +249,7 @@ async function reqserv() {
         }
     ).then(data => {
             // $("#messagesField").append('Eu: ' + question + '<br/>');
-            $("#messagesField").append(setUserMessage('Eu: ' + question));
+            $("#messagesField").append(setUserMessage(question));
 			$("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
             console.log("reqserv", JSON.parse(data));
             var jmsg = JSON.parse(data);
@@ -387,7 +387,7 @@ function sendMsgBtn() {
 	).then(
 		data => {
             // $("#messagesField").append('Sent..' + data + '<br/>');
-            $("#messagesField").append(setUserMessage('Enviado... ' + data));
+            //$("#messagesField").append(setUserMessage('Enviado... ' + data));
 			$("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
 		}
 	).catch(function(error) {
@@ -396,7 +396,7 @@ function sendMsgBtn() {
 		// $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
     });
     // $("#messagesField").append('<br/>Eu: ' + this.value + '<br/>');
-    $("#messagesField").append(setUserMessage('Eu: ' + this.value));
+    $("#messagesField").append(setUserMessage(this.value));
 	$("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
 }
 
@@ -417,8 +417,8 @@ async function sendMsg(e) {
         ).then(
             data => {
                 // $("#messagesField").append('Sent..' + data + '<br/>');
-                $("#messagesField").append(setUserMessage('Enviado... ' + data));
-                $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
+                // $("#messagesField").append(setUserMessage('Enviado... ' + data));
+                // $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
             }
         ).catch(function(error) {
             console.log(error);
@@ -426,7 +426,7 @@ async function sendMsg(e) {
             // $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
         });
 
-        $("#messagesField").append('Eu: ' + setUserMessage(txtMsg.value));
+        $("#messagesField").append(setUserMessage(txtMsg.value));
         $("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
 
     } else if (pauseTimeout === null) {
