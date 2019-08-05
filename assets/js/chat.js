@@ -134,16 +134,16 @@ async function loginSSE() {
         console.log("chatapi.chat", JSON.parse(e.data));
         var jmsg = JSON.parse(e.data);
         if (jmsg.state == 'composing') {
-            $("#messagesField").append(jmsg.from.split("@")[0] + ' is typing...');
+            $("#status-agent").html(jmsg.from.split("@")[0] + ' está digitand...');
             //document.getElementById('state').innerHTML = jmsg.from.split("@")[0] + ' is typing...';
         } else if (jmsg.state == 'paused') {
-            $("#messagesField").append(jmsg.from.split("@")[0] + ' is paused...');
+            $("#status-agent").html(jmsg.from.split("@")[0] + ' está pronto...');
             //document.getElementById('state').innerHTML = jmsg.from.split("@")[0] + ' is paused...';
         } else if (jmsg.state == 'active') {
-            $("#messagesField").append(jmsg.from.split("@")[0] + ' is online...');
+            $("#status-agent").html(jmsg.from.split("@")[0] + ' está online...');
             //document.getElementById('state').innerHTML = jmsg.from.split("@")[0] + ' is online...';
         } else if (jmsg.state == 'gone') {
-            $("#messagesField").append(jmsg.from.split("@")[0] + ' is offline...');
+            $("#status-agent").html(jmsg.from.split("@")[0] + ' está offline...');
             //document.getElementById('state').innerHTML = jmsg.from.split("@")[0] + ' is offline...';
         }
     });
