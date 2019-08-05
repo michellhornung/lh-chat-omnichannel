@@ -3,6 +3,8 @@
  */
 
 var messageRight = '';
+var messageLeft = '';
+var btnCustom = '';
 var username = '';
 
 $(document).ready(function(){
@@ -157,9 +159,17 @@ async function loginSSE() {
                 $("#messagesField").append(jmsg.from.split("/")[1] + ': ' + jmsgdata.data + '<br/>');
 				//document.getElementById('MsgFrame').contentWindow.document.getElementById('content').innerHTML += jmsg.from.split("/")[1] + ': ' + jmsgdata.data + '<br/>';
 			} else if (jmsgdata.type == 'Option') {
-				for (var opt in jmsgdata.options) {				
-					var btn = document.createElement("input");
-					btn.setAttribute('type','button');					
+				for (var opt in jmsgdata.options) {			
+                    
+                    // btnCustom = 
+                    // '<div class="ml-auto"> ' +
+                    //  '   <input type="button" value="' + jmsgdata.options[opt] + ' " ' +
+                    //  ' class="btn btn-sm btn-warning btn-round" onclick="sendMsgBtn()"> ' +
+                    // ' </div> '
+
+                    var btn = document.createElement("input");
+                    btn.setAttribute('type','button');		
+                    btn.setAttribute('class', 'btn btn-sm btn-warning btn-round')			
 					btn.setAttribute('value',jmsgdata.options[opt]);
                     btn.onclick = sendMsgBtn;
                     $("#messagesField").append(btn);
@@ -260,7 +270,12 @@ async function reqserv() {
                 throw Error('Canceled');
             }            
             room = jmsg.sender.split("@")[0];
+
+            
+
             $("#messagesField").append('Accepted...' + '<br/>');
+            $("#messagesField").append(getMessageFromAgent('right'));
+            
 			$("#messagesField").animate({ scrollTop: $("#messagesField").prop('scrollHeight') }, 340);
 			enterchat();
         }
@@ -519,6 +534,17 @@ function getDateTime() {
     return formatted;
 }
 
+function getMessageFromAgent(messageSide) {
+    message = 
+        '<li class="message '+ messageSide + ' appeared"> ' +
+         '   <div class="text_wrapper"> ' +
+          '  <div class="text">Eu: '  + txtMsg.value  + '</div> ' +
+           ' </div> ' +
+            '<time datetime="2009-11-13T20:00"> ' + username + ' • ' + getDateTime(); + ' </time> ' +
+        '</li> '
+        //$("#messagesField").append(messageRight);
+    return message;
+}
 
 
 

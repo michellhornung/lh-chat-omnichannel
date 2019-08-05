@@ -278,8 +278,8 @@ font-size: 0.7em;
 padding: 10px;
 }
 .avatar .image-agent{
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   display: inline-block;
   background-color: #f5886e;
@@ -297,7 +297,7 @@ padding: 10px;
     clear: both;
     width: 100%;
     padding: 0;
-    margin: -5px 0 -10px 0;
+    margin: -5px 0 -8px 0;
 }
 
 .message_identify-continus{
@@ -345,4 +345,94 @@ padding: 10px;
     display: grid;
     padding-right: 25px;
     text-align: right;
+}
+
+.btn.btn-chcustom {
+  color: #fff;
+  background-color: #136a8a;
+  border-color: #0b3444;
+  box-shadow: 0 2px 2px 0 rgba(19,106,138, 0.14), 0 3px 1px -2px rgba(19,106,138, 0.2), 0 1px 5px 0 rgba(19,106,138, 0.12);
+}
+
+.btn.btn-chcustom:hover {
+  color: #fff;
+  background-color: #0b3444;
+  border-color: #136a8a;
+}
+
+.btn.btn-chcustom:focus,
+.btn.btn-chcustom.focus,
+.btn.btn-chcustom:hover {
+  color: #fff;
+  background-color: #0b3444;
+  border-color: #136a8a;
+}
+
+.btn.btn-chcustom:active,
+.btn.btn-chcustom.active,
+.open>.btn.btn-chcustom.dropdown-toggle,
+.show>.btn.btn-chcustom.dropdown-toggle {
+  color: #fff;
+  background-color: #0b3444;
+  border-color: #136a8a;
+  box-shadow: 0 2px 2px 0 rgba(19,106,138, 0.14), 0 3px 1px -2px rgba(19,106,138, 0.2), 0 1px 5px 0 rgba(19,106,138, 0.12);
+}
+
+.btn.btn-chcustom:active:hover,
+.btn.btn-chcustom:active:focus,
+.btn.btn-chcustom:active.focus,
+.btn.btn-chcustom.active:hover,
+.btn.btn-chcustom.active:focus,
+.btn.btn-chcustom.active.focus,
+.open>.btn.btn-chcustom.dropdown-toggle:hover,
+.open>.btn.btn-chcustom.dropdown-toggle:focus,
+.open>.btn.btn-chcustom.dropdown-toggle.focus,
+.show>.btn.btn-chcustom.dropdown-toggle:hover,
+.show>.btn.btn-chcustom.dropdown-toggle:focus,
+.show>.btn.btn-chcustom.dropdown-toggle.focus {
+  color: #fff;
+  background-color: #0b3444;
+  border-color: #136a8a;
+}
+
+.open>.btn.btn-chcustom.dropdown-toggle.bmd-btn-icon {
+  color: inherit;
+  background-color: #136a8a;
+}
+
+.open>.btn.btn-chcustom.dropdown-toggle.bmd-btn-icon:hover {
+  background-color: #0b3444;
+}
+
+.btn.btn-chcustom.disabled:focus,
+.btn.btn-chcustom.disabled.focus,
+.btn.btn-chcustom:disabled:focus,
+.btn.btn-chcustom:disabled.focus {
+  background-color: #136a8a;
+  border-color: #136a8a;
+}
+
+.btn.btn-chcustom.disabled:hover,
+.btn.btn-chcustom:disabled:hover {
+  background-color: #136a8a;
+  border-color: #136a8a;
+}
+
+.btn.btn-chcustom:focus,
+.btn.btn-chcustom:active,
+.btn.btn-chcustom:hover {
+  box-shadow: 0 14px 26px -12px rgba(19,106,138, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(19,106,138, 0.2);
+}
+
+.btn.btn-chcustom.btn-link {
+  background-color: transparent;
+  color: #136a8a;
+  box-shadow: none;
+}
+
+.btn.btn-chcustom.btn-link:hover,
+.btn.btn-chcustom.btn-link:focus,
+.btn.btn-chcustom.btn-link:active {
+  background-color: transparent;
+  color: #0b3444;
 }
