@@ -155,7 +155,7 @@ async function loginSSE() {
                 sound.controls = 'controls';
                 sound.src = jmsgdata.data;
                 sound.type = 'audio/mpeg';
-                $("#messagesField").html(setAgentMessage(sound));
+                $("#messagesField").append(sound);
                 sound.play();
             } else if (jmsgdata.type == 'Transfer') {
                 txtFila.value = jmsgdata.data;
